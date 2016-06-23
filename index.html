@@ -137,6 +137,12 @@
 
     // SCATTERPLOT
 
+    var points = svg.selectAll('.point')
+      .data(txData)
+      .enter().append('circle')
+      .attr('class', 'point')
+      .attr('r', 5);
+
     // HISTOGRAMS
 
     // REGRESSION LINE
