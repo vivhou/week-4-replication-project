@@ -35,7 +35,7 @@
       font-weight: 700;
     }
 
-    .circle {
+    .point {
       stroke: rgb(51, 122, 183);
       stroke-width: 1;
       fill: rgba(51, 122, 183, .5);
@@ -151,7 +151,9 @@
       .data(txData)
       .enter().append('circle')
       .attr('class', 'point')
-      .attr('r', 5);
+      .attr('r', 5)
+      .attr('cx', function (d) { return x(d.unemployment); })
+      .attr('cy', function (d) { return y(d.inflation); });
 
     // HISTOGRAMS
 
