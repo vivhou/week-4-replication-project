@@ -96,6 +96,15 @@
 
   // FETCH DATA
 
+  d3.json('data.json', function(error, json {
+    if (error) { throw json;} //if error is defined, then don't do anything
+
+    data = json;
+
+    setup(); //must occur after fetching the data
+    update();
+  });
+
   function setup() {
     // SVG
 
