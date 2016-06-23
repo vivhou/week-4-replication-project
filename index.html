@@ -130,6 +130,23 @@
 
     // AXES
 
+    var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient('bottom');
+
+    var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient('left');
+
+    svg.append('g')
+      .attr('class', 'x axis')
+      .attr('transform', 'translate(0,' + (height) + ')')
+      .call(xAxis);
+
+    svg.append('g')
+      .attr('class', 'y axis')
+      .call(yAxis);
+
     // EVENT HANDLERS
 
     d3.select('#year-range').on('change', function () {
