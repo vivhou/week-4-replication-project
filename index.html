@@ -143,11 +143,24 @@
     svg.append('g')
       .attr('class', 'x axis')
       .attr('transform', 'translate(0,' + (height) + ')')
-      .call(xAxis);
+      .call(xAxis)
+      .append('text')
+      .attr('class', 'label')
+      .attr('y', 28)
+      .attr('x', width / 2)
+      .style('text-anchor', 'middle')
+      .text('Unemployment Rate');
 
     svg.append('g')
       .attr('class', 'y axis')
-      .call(yAxis);
+      .call(yAxis)
+      .append('text')
+      .attr('class', 'label')
+      .attr('transform', 'rotate(-90)')
+      .attr('y', -35)
+      .attr('x', -height / 2)
+      .style('text-anchor', 'middle')
+      .text('Inflation Rate (CPI-U)');
 
     // EVENT HANDLERS
 
