@@ -88,7 +88,7 @@
     yearRange: 'all'
   };
 
-  var svg;
+  var svg, x, y;
 
   var width = 640;
   var height = 480;
@@ -113,6 +113,16 @@
       .attr('height', height);
 
     // SCALES
+
+    x = d3.scale.linear()
+      .domain([0, d3.max(data, function (d) { return d.unemployment; })])
+      .range([0, width])
+      .nice();
+
+    y = d3.scale.linear()
+      .domain(d3.extent(data, function (d) { return d.inflation; }))
+      .range([height, 0])
+      .nice();
 
     // AXES
 
