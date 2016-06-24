@@ -95,8 +95,10 @@
 
   var svg, x, y;
 
-  var width = 640;
-  var height = 400;
+  var margin = { top: 15, right: 15, bottom: 30, left: 45 } ; //spacing b/w svg and g
+
+  var width = 640 - margin.right - margin.left;
+  var height = 400 - margin.top - margin.bottom;
 
   // FETCH DATA
 
@@ -115,10 +117,11 @@
 
     svg = d3.select('#chart')
       .append('svg')
-      .attr('width', width)
-      .attr('height', height);
+      .attr('width', width + margin.right + margin.left)
+      .attr('height', height + margin.top + margin.bottom)
+      .append('g')
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-      ;
 
 
     // SCALES
@@ -155,15 +158,26 @@
       });
     }
 
+
     // SCATTERPLOT
 
+   // svg.selectAll('.point')
+    //  .remove();
+
     var points = svg.selectAll('.point') //point is used instead of circles, in case different shapes are used
-      .data(txData)
-      .enter().append('circle')
-      .attr('class', 'point')
-      .attr('r', 5)
-      .attr('cx', function (d) { return x(d.unemployment); })
-      .attr('cy', function (d) { return y(d.inflation); });
+      .data(txData);
+
+      //console.log(points)
+
+      points.enter().append('circle')  //add points if points don't exist
+        .attr('class', 'point')
+        .attr('r', 5)
+
+      points    //all points
+        .attr('cx', function (d) { return x(d.unemployment); })
+        .attr('cy', function (d) { return y(d.inflation); });
+
+      points.exit().remove();
 
     // HISTOGRAMS
 
