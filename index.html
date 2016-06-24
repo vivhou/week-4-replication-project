@@ -91,12 +91,16 @@
   var options = {
     yearRange: 'all'
   };
+  
 
-  var svg;
+  var svg, x, y;
+
+  var width = 640;
+  var height = 400;
 
   // FETCH DATA
 
-  d3.json('data.json', function(error, json {
+  d3.json('data.json', function(error, json) {
     if (error) { throw json;} //if error is defined, then don't do anything
 
     data = json;
@@ -107,11 +111,28 @@
 
   function setup() {
     // SVG
+   
 
     svg = d3.select('#chart')
-      .append('svg');
+      .append('svg')
+      .attr('width', width)
+      .attr('height', height);
+
+      ;
+
 
     // SCALES
+
+    x = d3.scale.linear()
+      .domain([0, d3.max(data, function (d) { return d.unemployment; })]) //finds highest value of employment
+      .range([0, width])
+      .nice();
+
+
+    y = d3.scale.linear()
+      .domain(d3.extent(data, function (d) { return d.inflation; })) //finds
+      .range([height, 0])
+      .nice();
 
     // AXES
 
@@ -135,6 +156,14 @@
     }
 
     // SCATTERPLOT
+
+    var points = svg.selectAll('.point') //point is used instead of circles, in case different shapes are used
+      .data(txData)
+      .enter().append('circle')
+      .attr('class', 'point')
+      .attr('r', 5)
+      .attr('cx', function (d) { return x(d.unemployment); })
+      .attr('cy', function (d) { return y(d.inflation); });
 
     // HISTOGRAMS
 
