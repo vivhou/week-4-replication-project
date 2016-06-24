@@ -66,14 +66,14 @@
 <div class="controls section">
   <div class="container">
     <div class="btn-toolbar">
-      <label for="year-range">Year range: </label>
-      <select id="year-range">
-        <option value="all">All (1948&ndash;2016)</option>
-        <option value="1955-1971">1955&ndash;1971</option>
-        <option value="1974-1984">1974&ndash;1984</option>
-        <option value="1985-1992">1985&ndash;1992</option>
-        <option value="1997-2007">1997&ndash;2007</option>
-        <option value="2008-2016">2008&ndash;2016</option>
+      <label for="categories">Categories: </label>
+      <select id="categories">
+        <option value="all">All Categories</option>
+        <option value="White">White</option>
+        <option value="Black">Black</option>
+        <option value="Asian">Asian</option>
+        <option value="Hispanic">Hispanic</option>
+        <option value="Free-meal">Free Meal</option>
       </select>
     </div>
   </div>
@@ -89,7 +89,7 @@
 <script>
   var data = [];
   var options = {
-    yearRange: 'all'
+    categoryRange: 'all'
   };
   
 
@@ -102,7 +102,7 @@
 
   // FETCH DATA
 
-  d3.json('data.json', function(error, json) {
+  d3.json('school_data.json', function(error, json) {
     if (error) { throw json;} //if error is defined, then don't do anything
 
     data = json;
@@ -127,13 +127,13 @@
     // SCALES
 
     x = d3.scale.linear()
-      .domain([0, d3.max(data, function (d) { return d.unemployment; })]) //finds highest value of employment
+      .domain([0, d3.max(data, function (d) { return d.Reading_proficient; })]) //finds highest value of reading scores
       .range([0, width])
       .nice();
 
 
     y = d3.scale.linear()
-      .domain(d3.extent(data, function (d) { return d.inflation; })) //finds
+      .domain(d3.extent(data, function (d) { return d.Math_proficient; })) 
       .range([height, 0])
       .nice();
 
@@ -141,20 +141,20 @@
 
     // EVENT HANDLERS
 
-    d3.select('#year-range').on('change', function () {
-      options.yearRange = d3.event.target.value;
+    d3.select('#categories').on('change', function () {
+      options.categoryRange = d3.event.target.value;
       update();
     });
   }
 
   function update() {
     // TRANSFORM
-    txData = data.slice();
+    schoolData = data.slice();
 
-    if (options.yearRange !== 'all') {
-      var yearRange = options.yearRange.split('-');
-      txData = txData.filter(function (d) {
-        return d.year >= yearRange[0] && d.year <= yearRange[1];
+    if (options.categoryRange !== 'all') {
+      var categoryRange = options.categoryRange.split('');
+      schoolData = schoolData.filter(function (d) {
+        return d.Category >= categoryRange[0] && d.Category <= categoryRange[1];
       });
     }
 
@@ -165,7 +165,7 @@
     //  .remove();
 
     var points = svg.selectAll('.point') //point is used instead of circles, in case different shapes are used
-      .data(txData);
+      .data(schoolData);
 
       //console.log(points)
 
@@ -174,8 +174,8 @@
         .attr('r', 5)
 
       points    //all points
-        .attr('cx', function (d) { return x(d.unemployment); })
-        .attr('cy', function (d) { return y(d.inflation); });
+        .attr('cx', function (d) { return x(d.Reading_proficient); })
+        .attr('cy', function (d) { return y(d.Math_proficient); });
 
       points.exit().remove();
 
