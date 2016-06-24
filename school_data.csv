@@ -1,0 +1,290 @@
+code,school,Category,Reading_proficient,Math_proficient
+202,Aiton ES,Free-meal,16%,13%
+203,Amidon Bowen ES,Free-meal,25%,29%
+204,Bancroft ES,Free-meal,25%,49%
+205,Barnard ES,Free-meal,50%,39%
+206,Beers ES,Free-meal,36%,26%
+212,Brent ES,Free-meal,50%,56%
+213,Brightwood EC,Free-meal,31%,38%
+220,Burroughs EC,Free-meal,41%,35%
+221,Burrville ES,Free-meal,30%,29%
+224,Cleveland ES,Free-meal,60%,42%
+227,H D Cooke ES,Free-meal,34%,32%
+231,Drew ES,Free-meal,32%,34%
+232,Eaton ES,Free-meal,65%,49%
+238,Garfield ES,Free-meal,17%,23%
+239,Garrison ES,Free-meal,23%,19%
+246,Hardy MS,Free-meal,45%,47%
+247,C W Harris ES,Free-meal,12%,12%
+249,Hendley ES,Free-meal,12%,20%
+251,Houston ES,Free-meal,20%,24%
+252,Hyde Addison ES,Free-meal,57%,38%
+254,Janney ES,Free-meal,62%,62%
+257,Ketcham ES,Free-meal,32%,38%
+258,Hearst ES,Free-meal,48%,43%
+259,Kimball ES,Free-meal,24%,38%
+261,Lafayette ES,Free-meal,48%,40%
+262,Langdon EC,Free-meal,44%,30%
+264,LaSalle Backus EC,Free-meal,26%,19%
+265,Mamie D Lee School,Free-meal,18%,12%
+266,Leckie ES,Free-meal,52%,40%
+271,Ludlow Taylor ES,Free-meal,58%,34%
+272,Key ES,Free-meal,45%,55%
+274,Maury ES,Free-meal,47%,53%
+280,Miner ES,Free-meal,25%,20%
+284,Marie Reed ES,Free-meal,54%,41%
+285,Moten ES,Free-meal,15%,16%
+287,Murch ES,Free-meal,52%,52%
+288,Nalle ES,Free-meal,30%,36%
+290,Noyes EC,Free-meal,28%,24%
+291,Orr ES,Free-meal,32%,30%
+292,Oyster Adams Bilingual School,Free-meal,58%,54%
+294,Patterson ES,Free-meal,19%,13%
+295,Payne ES,Free-meal,33%,22%
+296,Bruce Monroe ES at Park View,Free-meal,27%,37%
+299,Plummer ES,Free-meal,33%,25%
+300,Powell ES,Free-meal,49%,43%
+302,Raymond EC,Free-meal,43%,45%
+305,Ross ES,Free-meal,63%,32%
+307,Savoy ES,Free-meal,25%,29%
+308,Malcolm X ES at Green,Free-meal,19%,26%
+309,Seaton ES,Free-meal,47%,49%
+312,Sharpe Health School,Free-meal,58%,26%
+313,Shepherd ES,Free-meal,43%,40%
+315,Simon ES,Free-meal,24%,29%
+316,Randle Highlands ES,Free-meal,41%,30%
+319,Stanton ES,Free-meal,27%,32%
+321,Stoddert ES,Free-meal,69%,38%
+322,Smothers ES,Free-meal,23%,22%
+324,Takoma EC,Free-meal,31%,28%
+325,Thomas ES,Free-meal,33%,31%
+326,Thomson ES,Free-meal,58%,40%
+327,Truesdell EC,Free-meal,38%,55%
+328,Tubman ES,Free-meal,44%,33%
+329,Turner ES,Free-meal,21%,14%
+330,Tyler ES,Free-meal,45%,24%
+332,Walker Jones EC,Free-meal,24%,27%
+333,Watkins ES,Free-meal,36%,45%
+335,Wheatley EC,Free-meal,28%,37%
+336,West EC,Free-meal,46%,58%
+338,Whittier EC,Free-meal,40%,44%
+339,J O Wilson ES,Free-meal,39%,31%
+344,"King, M L ES",Free-meal,30%,20%
+346,Brookland EC at Bunker Hill,Free-meal,35%,28%
+370,Langley EC,Free-meal,23%,19%
+402,Benjamin Banneker HS,Free-meal,46%,44%
+404,Browne EC,Free-meal,25%,28%
+405,Deal MS,Free-meal,50%,49%
+407,Eliot Hine MS,Free-meal,32%,34%
+409,School Without Walls at Francis Stevens,Free-meal,45%,39%
+413,Hart MS,Free-meal,20%,21%
+416,Johnson John Hayden MS,Free-meal,26%,18%
+417,Kramer MS,Free-meal,21%,22%
+421,Kelly Miller MS,Free-meal,27%,45%
+427,Sousa MS,Free-meal,38%,41%
+428,Stuart Hobson MS,Free-meal,45%,38%
+433,Jefferson Middle School Academy,Free-meal,38%,42%
+435,Mckinley Middle School,Free-meal,30%,28%
+442,Columbia Heights EC (CHEC),Free-meal,36%,42%
+450,Anacostia HS,Free-meal,19%,22%
+452,Ballou HS,Free-meal,13%,16%
+454,Cardozo EC,Free-meal,25%,24%
+455,Coolidge HS,Free-meal,33%,31%
+457,Eastern HS,Free-meal,37%,39%
+458,McKinley Technology HS,Free-meal,71%,77%
+459,Roosevelt HS at MacFarland,Free-meal,13%,16%
+462,Ballou STAY,Free-meal,10%,10%
+463,Wilson HS,Free-meal,44%,42%
+464,Woodson H D HS,Free-meal,16%,23%
+466,School Without Walls HS,Free-meal,46%,58%
+467,Dunbar HS,Free-meal,39%,23%
+471,Ellington School of the Arts,Free-meal,47%,77%
+474,Washington Metropolitan HS,Free-meal,16%,8%
+478,Phelps Architecture Construction and Engineering HS,Free-meal,43%,34%
+884,Luke Moore Alternative HS,Free-meal,19%,13%
+DCPS,DC Public Schools,Free-meal,32%,33%
+204,Bancroft ES,Asian,58%,67%
+246,Hardy MS,Asian,42%,42%
+252,Hyde Addison ES,Asian,77%,31%
+254,Janney ES,Asian,54%,31%
+287,Murch ES,Asian,80%,47%
+292,Oyster Adams Bilingual School,Asian,80%,30%
+309,Seaton ES,Asian,55%,18%
+326,Thomson ES,Asian,71%,46%
+405,Deal MS,Asian,55%,31%
+433,Jefferson Middle School Academy,Asian,46%,23%
+442,Columbia Heights EC (CHEC),Asian,46%,23%
+463,Wilson HS,Asian,58%,39%
+DCPS,DC Public Schools,Asian,58%,35%
+202,Aiton ES,Black,16%,13%
+203,Amidon Bowen ES,Black,25%,29%
+204,Bancroft ES,Black,25%,25%
+205,Barnard ES,Black,49%,38%
+206,Beers ES,Black,36%,26%
+212,Brent ES,Black,57%,57%
+213,Brightwood EC,Black,34%,42%
+220,Burroughs EC,Black,43%,33%
+221,Burrville ES,Black,30%,29%
+224,Cleveland ES,Black,66%,41%
+227,H D Cooke ES,Black,27%,20%
+231,Drew ES,Black,33%,35%
+232,Eaton ES,Black,70%,44%
+238,Garfield ES,Black,17%,23%
+239,Garrison ES,Black,23%,16%
+246,Hardy MS,Black,52%,52%
+247,C W Harris ES,Black,12%,12%
+249,Hendley ES,Black,13%,21%
+251,Houston ES,Black,20%,23%
+252,Hyde Addison ES,Black,58%,44%
+254,Janney ES,Black,63%,44%
+257,Ketcham ES,Black,31%,37%
+258,Hearst ES,Black,54%,51%
+259,Kimball ES,Black,23%,37%
+261,Lafayette ES,Black,40%,42%
+262,Langdon EC,Black,42%,29%
+264,LaSalle Backus EC,Black,27%,20%
+265,Mamie D Lee School,Black,18%,12%
+266,Leckie ES,Black,51%,41%
+271,Ludlow Taylor ES,Black,61%,33%
+272,Key ES,Black,72%,67%
+273,Mann ES,Black,79%,71%
+274,Maury ES,Black,47%,45%
+280,Miner ES,Black,25%,19%
+284,Marie Reed ES,Black,45%,27%
+285,Moten ES,Black,15%,16%
+287,Murch ES,Black,51%,37%
+288,Nalle ES,Black,29%,35%
+290,Noyes EC,Black,28%,22%
+291,Orr ES,Black,33%,31%
+292,Oyster Adams Bilingual School,Black,59%,45%
+294,Patterson ES,Black,19%,12%
+295,Payne ES,Black,33%,23%
+296,Bruce Monroe ES at Park View,Black,32%,27%
+299,Plummer ES,Black,33%,24%
+300,Powell ES,Black,73%,55%
+302,Raymond EC,Black,49%,44%
+305,Ross ES,Black,75%,46%
+307,Savoy ES,Black,25%,30%
+308,Malcolm X ES at Green,Black,19%,26%
+309,Seaton ES,Black,47%,56%
+312,Sharpe Health School,Black,56%,25%
+313,Shepherd ES,Black,60%,45%
+315,Simon ES,Black,24%,29%
+316,Randle Highlands ES,Black,42%,29%
+319,Stanton ES,Black,27%,33%
+321,Stoddert ES,Black,62%,34%
+322,Smothers ES,Black,24%,23%
+324,Takoma EC,Black,29%,26%
+325,Thomas ES,Black,32%,30%
+326,Thomson ES,Black,61%,39%
+327,Truesdell EC,Black,41%,62%
+328,Tubman ES,Black,40%,36%
+329,Turner ES,Black,21%,13%
+330,Tyler ES,Black,41%,20%
+332,Walker Jones EC,Black,23%,26%
+333,Watkins ES,Black,41%,43%
+335,Wheatley EC,Black,27%,37%
+336,West EC,Black,50%,56%
+338,Whittier EC,Black,38%,44%
+339,J O Wilson ES,Black,40%,32%
+344,"King, M L ES",Black,30%,20%
+346,Brookland EC at Bunker Hill,Black,35%,27%
+360,Capitol Hill Montessori School at Logan,Black,59%,21%
+370,Langley EC,Black,21%,19%
+402,Benjamin Banneker HS,Black,48%,49%
+404,Browne EC,Black,26%,28%
+405,Deal MS,Black,56%,52%
+407,Eliot Hine MS,Black,31%,35%
+409,School Without Walls at Francis Stevens,Black,43%,43%
+413,Hart MS,Black,20%,21%
+416,Johnson John Hayden MS,Black,26%,19%
+417,Kramer MS,Black,21%,22%
+421,Kelly Miller MS,Black,27%,43%
+427,Sousa MS,Black,38%,41%
+428,Stuart Hobson MS,Black,46%,41%
+433,Jefferson Middle School Academy,Black,36%,42%
+435,Mckinley Middle School,Black,33%,29%
+442,Columbia Heights EC (CHEC),Black,39%,45%
+450,Anacostia HS,Black,19%,22%
+452,Ballou HS,Black,14%,15%
+454,Cardozo EC,Black,26%,22%
+455,Coolidge HS,Black,32%,29%
+457,Eastern HS,Black,36%,38%
+458,McKinley Technology HS,Black,67%,74%
+459,Roosevelt HS at MacFarland,Black,15%,14%
+462,Ballou STAY,Black,8%,8%
+463,Wilson HS,Black,43%,51%
+464,Woodson H D HS,Black,16%,23%
+466,School Without Walls HS,Black,41%,55%
+467,Dunbar HS,Black,37%,22%
+471,Ellington School of the Arts,Black,46%,66%
+474,Washington Metropolitan HS,Black,15%,6%
+478,Phelps Architecture Construction and Engineering HS,Black,48%,33%
+884,Luke Moore Alternative HS,Black,21%,10%
+204,Bancroft ES,Hispanic,25%,47%
+205,Barnard ES,Hispanic,51%,41%
+212,Brent ES,Hispanic,90%,40%
+213,Brightwood EC,Hispanic,30%,37%
+220,Burroughs EC,Hispanic,29%,53%
+224,Cleveland ES,Hispanic,48%,48%
+227,H D Cooke ES,Hispanic,39%,39%
+232,Eaton ES,Hispanic,60%,40%
+239,Garrison ES,Hispanic,21%,26%
+246,Hardy MS,Hispanic,41%,51%
+252,Hyde Addison ES,Hispanic,67%,8%
+254,Janney ES,Hispanic,63%,48%
+261,Lafayette ES,Hispanic,67%,50%
+262,Langdon EC,Hispanic,70%,50%
+264,LaSalle Backus EC,Hispanic,25%,19%
+272,Key ES,Hispanic,43%,48%
+273,Mann ES,Hispanic,62%,69%
+284,Marie Reed ES,Hispanic,55%,45%
+287,Murch ES,Hispanic,44%,25%
+292,Oyster Adams Bilingual School,Hispanic,58%,50%
+296,Bruce Monroe ES at Park View,Hispanic,25%,40%
+300,Powell ES,Hispanic,45%,41%
+302,Raymond EC,Hispanic,40%,46%
+309,Seaton ES,Hispanic,44%,53%
+313,Shepherd ES,Hispanic,60%,30%
+321,Stoddert ES,Hispanic,67%,50%
+324,Takoma EC,Hispanic,32%,31%
+326,Thomson ES,Hispanic,47%,40%
+327,Truesdell EC,Hispanic,36%,53%
+328,Tubman ES,Hispanic,47%,31%
+336,West EC,Hispanic,50%,53%
+338,Whittier EC,Hispanic,54%,46%
+370,Langley EC,Hispanic,30%,20%
+405,Deal MS,Hispanic,47%,42%
+409,School Without Walls at Francis Stevens,Hispanic,53%,65%
+421,Kelly Miller MS,Hispanic,23%,85%
+433,Jefferson Middle School Academy,Hispanic,67%,50%
+442,Columbia Heights EC (CHEC),Hispanic,36%,42%
+454,Cardozo EC,Hispanic,22%,27%
+459,Roosevelt HS at MacFarland,Hispanic,10%,19%
+463,Wilson HS,Hispanic,46%,45%
+466,School Without Walls HS,Hispanic,29%,43%
+471,Ellington School of the Arts,Hispanic,50%,67%
+DCPS,DC Public Schools,Hispanic,41%,42%
+212,Brent ES,White,69%,28%
+232,Eaton ES,White,65%,41%
+246,Hardy MS,White,63%,46%
+252,Hyde Addison ES,White,64%,36%
+254,Janney ES,White,56%,33%
+258,Hearst ES,White,47%,13%
+261,Lafayette ES,White,60%,37%
+272,Key ES,White,64%,42%
+273,Mann ES,White,61%,47%
+274,Maury ES,White,73%,48%
+287,Murch ES,White,67%,41%
+292,Oyster Adams Bilingual School,White,53%,17%
+305,Ross ES,White,64%,36%
+321,Stoddert ES,White,52%,34%
+333,Watkins ES,White,65%,47%
+360,Capitol Hill Montessori School at Logan,White,75%,63%
+405,Deal MS,White,43%,23%
+428,Stuart Hobson MS,White,41%,44%
+454,Cardozo EC,White,18%,36%
+463,Wilson HS,White,30%,45%
+466,School Without Walls HS,White,13%,20%
+471,Ellington School of the Arts,White,10%,90%
+DCPS,DC Public Schools,White,52%,34%

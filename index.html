@@ -123,7 +123,7 @@
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 
-
+ 
     // SCALES
 
     x = d3.scale.linear()
@@ -152,9 +152,10 @@
     schoolData = data.slice();
 
     if (options.categoryRange !== 'all') {
-      var categoryRange = options.categoryRange.split('');
+     // var categoryRange = options.categoryRange.split('');
       schoolData = schoolData.filter(function (d) {
-        return d.Category >= categoryRange[0] && d.Category <= categoryRange[1];
+      //  return d.Category >= categoryRange[0] && d.Category <= categoryRange[1];
+          return d.Category === d3.event.target.value;
       });
     }
 
@@ -177,7 +178,7 @@
         .attr('cx', function (d) { return x(d.Reading_proficient); })
         .attr('cy', function (d) { return y(d.Math_proficient); });
 
-      points.exit().remove();
+     points.exit().remove();
 
     // HISTOGRAMS
 
