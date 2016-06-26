@@ -83,8 +83,8 @@
 <body>
 <div class="header section">
   <div class="container">
-    <h1>Proficiency Scores Among DC Public Schools</h1>
-    <p>Let's build a complex interactive graphic.</p>
+    <h1>Proficiency Scores Among DC.. Public Schools</h1>
+    <p>Average percentage of D.C. public school students (elementary through high school) who scored atleast basic proficiency in math and reading .</p>
   </div>
 </div>
 <div class="controls section">
@@ -128,6 +128,9 @@
 
   d3.json('school_data.json', function(error, json) {
     if (error) { throw json;} //if error is defined, then don't do anything
+
+
+    
 
     data = json;
 
@@ -175,7 +178,14 @@
     svg.append("g")
       .attr("class", "axis")
       .attr("transform", "translate(0," + (height-padding) + ")")
-      .call(xAxis);
+      .call(xAxis)
+      .append("text")
+   //   .attr("transform")
+      .attr("x", 450)
+      .attr("y", 45)
+  //    .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Reading proficiency");
 
     var yAxis = d3.svg.axis()
                   .scale(y)
@@ -185,7 +195,13 @@
     svg.append("g")
     .attr("class", "axis")
     .attr("transform", "translate(" + padding + ",0)")
-    .call(yAxis);
+    .call(yAxis)
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", -50)
+  //    .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Math proficiency");
 
     // EVENT HANDLERS
 
