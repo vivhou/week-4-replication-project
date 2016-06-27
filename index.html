@@ -14,6 +14,7 @@
     .header {
       color: white;
       padding: 1em 0 2em;
+
     }
 
     svg {
@@ -25,6 +26,11 @@
       fill: none;
       stroke: #ccc;
       shape-rendering: crispEdges;
+    }
+
+    .minor {
+      stroke: #777;
+      stroke-dasharray: 2,2;
     }
 
     .axis text {
@@ -72,11 +78,33 @@
       shape-rendering: crispEdges;
     }
 
+
+
     .axis text {
       font-family: "Lato", sans-serif;
       font-size: 11px;
       fill: #ffffff;
     }
+
+    p {
+      margin-top: 5px;
+    }
+
+    a {
+      font-size: 12px;
+      color: #ffffff;
+    
+    }
+
+    .subtitle {
+      font-size: 16px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+
+
+
 
   </style>
 </head>
@@ -84,7 +112,9 @@
 <div class="header section">
   <div class="container">
     <h1>Proficiency Scores Among DC. Public Schools</h1>
-    <p> Each dot below represents a school's reported percentage of students who scored atleast basic proficiency in math and reading in one of five categories. Schools with at least a sample size of 10 students or greater in each category may only provide this information.</p>
+    <p class="subtitle"> Each dot below represents a school's reported percentage of students who scored atleast basic proficiency in math and reading in one of five categories.</p>
+    <p>Note: Percentages only apply to schools with a sample size greater than 10 students in each category.</p>
+    <p class="source"><em>Source: <a href="http://dcps.dc.gov/service/school-data" target="_blank">DCPS Website</a></em></p>
   </div>
 </div>
 <div class="controls section">
@@ -171,37 +201,39 @@
     var formatPercentage = d3.format("1%");
 
     var xAxis = d3.svg.axis()
-                      .scale(x)
-                      .orient("bottom")
-                      .tickFormat(formatPercentage);
-
-    svg.append("g")
-      .attr("class", "axis")
-      .attr("transform", "translate(0," + (height-padding) + ")")
-      .call(xAxis)
-      .append("text")
-   //   .attr("transform")
-      .attr("x", 450)
-      .attr("y", 45)
-  //    .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("Reading proficiency");
+        .scale(x)
+        .orient("bottom")
+        .tickFormat(formatPercentage);
 
     var yAxis = d3.svg.axis()
-                  .scale(y)
-                  .orient("left")
-                  .tickFormat(formatPercentage);
+        .scale(y)
+        .orient("left")
+        .tickFormat(formatPercentage);
 
-    svg.append("g")
-    .attr("class", "axis")
-    .attr("transform", "translate(" + padding + ",0)")
-    .call(yAxis)
-      .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", -50)
-  //    .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("Math proficiency");
+        svg.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate(0," + (height-padding) + ")")
+          .call(xAxis)
+          .append("text")
+       //   .attr("transform")
+          .attr("x", 450)
+          .attr("y", 45)
+      //    .attr("dy", ".71em")
+          .style("text-anchor", "end")
+          .text("Reading proficiency");
+
+   
+
+        svg.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate(" + padding + ",0)")
+          .call(yAxis)
+          .append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 0 - margin.left)
+        // .attr("dy", ".7em")
+          .style("text-anchor", "end")
+          .text("Math proficiency");
 
     // EVENT HANDLERS
 
@@ -214,6 +246,12 @@
   function update() {
     // TRANSFORM
     schoolData = data.slice();
+/*
+    data.forEach(function (d) { 
+      d.filtered = d.Category;
+      var schoolData = data.filter(function (d) {return d.filtered;});
+    })
+*/
 
     if (options.categoryRange !== 'all') {
      // var categoryRange = options.categoryRange.split('');
@@ -221,7 +259,9 @@
       //  return d.Category >= categoryRange[0] && d.Category <= categoryRange[1];
           return d.Category === d3.event.target.value;
       });
+
     }
+ 
 
 
     // SCATTERPLOT
