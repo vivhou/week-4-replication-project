@@ -202,25 +202,29 @@
 
     var xAxis = d3.svg.axis()
         .scale(x)
-        .orient("bottom")
+        .orient("top")
+        .tickSize(height-padding-margin.top)
         .tickFormat(formatPercentage);
 
     var yAxis = d3.svg.axis()
         .scale(y)
         .orient("right")
-        .tickSize(width)
+        .tickSize(width-padding-margin.right)
         .tickFormat(formatPercentage);
 
     var gx = svg.append("g")
         .attr("class", "axis")
         .attr("transform", "translate(0," + (height-padding) + ")")
         .call(xAxis)
-        .append("text")
+        gx.selectAll("g").filter(function(d) { return d;})
+        .classed("minor", true);
      //   .attr("transform")
-        .attr("x", 450)
-        .attr("y", 45)
+        gx.selectAll("text")
+        .attr("x", 4)
+        .attr("y", 14)
     //    .attr("dy", ".71em")
-        .style("text-anchor", "end")
+     gx.append("text")
+        .attr("text-anchor", "end")
         .text("Reading proficiency");
 
    
