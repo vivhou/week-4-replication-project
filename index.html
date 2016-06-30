@@ -45,7 +45,7 @@
     .point {
       stroke: #FFFFFF;
       stroke-width: 2;
-      fill: #357C8D;
+      fill: #358d88;
       opacity: .5;
     }
 
@@ -187,13 +187,13 @@
 
     x = d3.scale.linear()
       .domain([0, d3.max(data, function (d) { return d.Reading_proficient/100; })]) //finds highest value of reading scores
-      .range([padding, width-padding])
+      .range([padding, width-margin.right])
       .nice();
 
 
     y = d3.scale.linear()
       .domain(d3.extent(data, function (d) { return d.Math_proficient/100; })) 
-      .range([height-padding, padding])
+      .range([height-padding, margin.top])
       .nice();
 
     // AXES
@@ -203,13 +203,13 @@
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("top")
-        .tickSize(height-padding-margin.top)
+        .tickSize(height-padding-(margin.top*1.1)) //if i omit multiplying by 1.1, the lines go past the graph for some reason
         .tickFormat(formatPercentage);
 
     var yAxis = d3.svg.axis()
         .scale(y)
         .orient("right")
-        .tickSize(width-padding-margin.right)
+        .tickSize(width-padding-(margin.right*1.1)) //if i omit multiplying by 1.1, the lines go past the graph for some reason
         .tickFormat(formatPercentage);
 
     var gx = svg.append("g")
@@ -217,15 +217,14 @@
         .attr("transform", "translate(0," + (height-padding) + ")")
         .call(xAxis)
         gx.selectAll("g").filter(function(d) { return d;})
-        .classed("minor", true);
+          .classed("minor", true);
      //   .attr("transform")
         gx.selectAll("text")
-        .attr("x", 4)
-        .attr("y", 14)
-    //    .attr("dy", ".71em")
-     gx.append("text")
-        .attr("text-anchor", "end")
-        .text("Reading proficiency");
+         .attr("transform", "translate(0," + (height-(padding)) + ")")
+        gx.append("text")
+          .attr("text-anchor", "middle")
+          .attr("transform", "translate(" + (width /2) + " ," + (padding*2) + ")")
+          .text("Reading proficiency");
 
    
 
@@ -234,17 +233,17 @@
         .attr("transform", "translate(" + padding + ",0)")
         .call(yAxis)
         gy.selectAll("g").filter(function(d) { return d;})
-        .classed("minor", true);
+          .classed("minor", true);
 
         gy.selectAll("text") 
-          .attr("x", 4)
-          .attr("dy", -4);
+         .attr("x", -24)
+         .attr("dy", -4);
 
-          gy.append("text")
-          .attr("text-anchor", "middle")
-          .attr("transform", "translate("+ (-padding) +","+(height/2)+")rotate(-90)")
-          .text("Math proficiency");
-   
+        gy.append("text")
+         .attr("text-anchor", "middle")
+        .attr("transform", "translate("+ (-padding*2) +","+(height/2)+")rotate(-90)")
+        .text("Math proficiency");
+ 
 
 
         /*     
