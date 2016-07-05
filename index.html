@@ -203,9 +203,9 @@
     // AXES
 
     var formatPercentage = d3.format("1%");
-    var formatPercentage_y = (function(d) { if (d > 0) {
-      return (d*100) + "%"; }
-    });
+    var formatPercentage_y = function(d) { if (d > 0) {
+      return formatPercentage(d); }
+    };
 
     var xAxis = d3.svg.axis()
         .scale(x)
