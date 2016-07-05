@@ -199,12 +199,15 @@
     // AXES
 
     var formatPercentage = d3.format("1%");
+    var formatPercentage_y = (function(d) { if (d > 0) {
+      return (d*100) + "%"; }
+    });
 
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("top")
         .ticks(10)
-        .tickSize(height) //if i omit multiplying by 1.1, the lines go past the graph for some reason
+        .tickSize(height) 
         .tickFormat(formatPercentage);
 
     var yAxis = d3.svg.axis()
@@ -213,7 +216,7 @@
         .ticks(10)
      //   .outerTickSize(0)
         .tickSize(-width, 0, 0) 
-        .tickFormat(formatPercentage);
+        .tickFormat(formatPercentage_y);
 
     var gx = svg.append("g")
           .attr("class", "x axis")
@@ -233,25 +236,24 @@
    
 
     var gy= svg.append("g")
-          .attr("class", "y axis")
-          .attr("transform", "translate(" + ",0)")
-          .call(yAxis)
-          gy.selectAll("g").filter(function(d) { return d;})
-            .classed("minor", true);
+           .attr("class", "y axis")
+           .attr("transform", "translate(" + ",0)")
+           .call(yAxis)
+        gy.selectAll("g").filter(function(d) { return d;})
+           .classed("minor", true);
 
-          gy.selectAll("text") 
-          
-           .attr("x", 0)
+        gy.selectAll("text") 
+           .attr("x", -1)
            .attr("dy", 0);
 
-          gy.append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", -42)
-            .attr("x", margin.top - (height/2))
-            .attr("dy", ".71em")
-            .style("text-anchor", "middle")
-            .text("Math proficiency");
-     
+        gy.append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", -42)
+          .attr("x", margin.top - (height/2))
+          .attr("dy", ".71em")
+          .style("text-anchor", "middle")
+          .text("Math proficiency");
+   
 
 
         /*     
