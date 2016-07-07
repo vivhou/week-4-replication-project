@@ -299,8 +299,6 @@
       });
 
     }
- 
-
 
     // SCATTERPLOT
 
@@ -353,24 +351,74 @@
 
  //   .bins(x.ticks(10));
 
-   var rects = svg.selectAll("rect")
+   var rectsX = svg.selectAll("rect")
       .data(layout)
       .enter()
       .append("rect");
 
-   rects
+   rectsX
     .attr({
       x: function(d,i) {
         return xScale(i)
       },
-      y: function(d) { return y(d.Reading_proficient/100); },
+      y: function(d) { return (d.Reading_proficient/100); },
       width: xScale.rangeBand(),
       height: function(d,i) {
         return heightScale(d.length);
       },
       fill: function(d, i) { return colorScale(i) }
-    }) 
-    rects.exit().remove();
+    }); 
+
+    //Y-AXIS
+
+    var hist_y = d3.layout.histogram()
+          .value(function(d) { return d.Math_proficient/100; })
+          .range([0, d3.max(schoolData, function(d){ return d.Math_proficient/100; }) ])
+          .bins(y.ticks(10))
+
+    var layout = hist_y(schoolData);
+
+    for(var i = 0; i < layout.length; i++) {
+    var bin = layout[i];
+    var colorScale = d3.scale.category20();
+    svg.selectAll("circle")
+    .data(bin, function(d) { return d.Math_proficient/100; })
+    .style("fill", function() {  return colorScale(i); })
+
+     }
+
+    var maxLength = d3.max(layout, function(d) { return d.length });
+    var widthScale = d3.scale.linear()
+    .domain([0, maxLength])
+    .range([0, width/5]);
+
+    var yScale = d3.scale.ordinal()
+    .domain(d3.range(10))
+    .rangeBands([height, 0], 0.2)
+
+ //   .bins(x.ticks(10));
+
+   var rectsY = svg.selectAll("rect")
+      .data(layout)
+      .enter()
+      .append("rect");
+
+   rectsY
+    .attr({
+      y: function(d,i) {
+        return yScale(i)
+      },
+      x: function(d) { return x(d.Math_proficient/100); },
+      height: yScale.rangeBand(),
+      width: function(d,i) {
+        return widthScale(d.length);
+      },
+      fill: function(d, i) { return colorScale(i) }
+    }); 
+
+
+    rectsX.exit().remove();
+    rectsY.exit().remove();
 
     // REGRESSION LINE
   }
