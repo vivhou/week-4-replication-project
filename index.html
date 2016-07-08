@@ -196,7 +196,6 @@
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-
  
     // SCALES
 
@@ -340,15 +339,6 @@
 
     var layout = hist_x(schoolData);
 
-    for(var i = 0; i < layout.length; i++) {
-    var bin = layout[i];
-    var colorScale = d3.scale.category20();
-    svg.selectAll("circle")
-      .data(bin, function(d) { return d.Reading_proficient/100; })
-      .style("fill", function() {  return colorScale(i); })
-
-     }
-
     var maxLength = d3.max(layout, function(d) { return d.length });
     var heightScale = d3.scale.linear()
       .domain([0, maxLength])
@@ -359,44 +349,34 @@
       .rangeBands([0, width], 0.2)
 
  //   .bins(x.ticks(10));
- 
+
     var rectsX = svg.selectAll("rect")
-      .attr('class', 'x_rect')
       .data(layout);
 
-    rectsX.enter().append("rect");
+    rectsX.enter().append("svg:rect");
 
     rectsX
     .attr({
       x: function(d,i) {
         return xScale(i)
       },
-      y: function(d) { return y-heightScale(d.length); },
+      y: function(d) { return height-heightScale(d.length); },
       width: xScale.rangeBand(),
-      height: function(d,i) {
+      height: function(d) {
         return heightScale(d.length);
       },
-      fill: function(d, i) { return colorScale(i) }
+      fill: '#e5a5b0'
     }); 
   
-/*
-    //Y-AXIS
 
+    //Y-AXIS
+/*
     var hist_y = d3.layout.histogram()
           .value(function(d) { return d.Math_proficient/100; })
           .range([0, d3.max(schoolData, function(d){ return d.Math_proficient/100; }) ])
           .bins(y.ticks(10))
 
     var layout = hist_y(schoolData);
-
-    for(var i = 0; i < layout.length; i++) {
-    var bin = layout[i];
-    var colorScale = d3.scale.category20();
-    svg.selectAll("circle")
-    .data(bin, function(d) { return d.Math_proficient/100; })
-    .style("fill", function() {  return colorScale(i); })
-
-     }
 
     var maxLength = d3.max(layout, function(d) { return d.length });
     var widthScale = d3.scale.linear()
@@ -410,7 +390,6 @@
  //   .bins(x.ticks(10));
 
    var rectsY = svg.selectAll("rect")
-      .attr('class', 'y_rect')
       .data(layout);
 
       rectsY.enter().append("rect");
@@ -425,7 +404,7 @@
         return widthScale(d.length);
       },
       height: yScale.rangeBand(),
-      fill: function(d, i) { return colorScale(i) }
+      fill: '#e5a5b0' 
     }); 
   
 
