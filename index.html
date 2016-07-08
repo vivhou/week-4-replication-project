@@ -334,37 +334,40 @@
 
     var hist_x = d3.layout.histogram()
           .value(function(d) { return d.Reading_proficient/100; })
-          .range([0, d3.max(schoolData, function(d){ return d.Reading_proficient/100; }) ])
+   //       .range([0, d3.max(schoolData, function(d){ return d.Reading_proficient/100; }) ])
           .bins(x.ticks(10))
+          (schoolData);
 
-    var layout = hist_x(schoolData);
 
-    var maxLength = d3.max(layout, function(d) { return d.length });
-    var heightScale = d3.scale.linear()
-      .domain([0, maxLength])
-      .range([0, height/5]);
+    var y2 = d3.scale.linear()
+        .domain([0, d3.max(hist_x, function(d) { return d.length; })]) 
+        .range([0, height]);
+    
+   // var maxLength = d3.max(layout, function(d) { return d.length });
+  // var heightScale = d3.scale.linear()
+  //    .domain([0, maxLength])
+   //   .range([0, height/5]);
 
-    var xScale = d3.scale.ordinal()
-      .domain(d3.range(10))
-      .rangeBands([0, width], 0.2)
+ //   var xScale = d3.scale.ordinal()
+ //     .domain(d3.range(10))
+ //     .rangeBands([0, width], 0.2)
 
  //   .bins(x.ticks(10));
+    var barWidth = x(hist_x[1].x) - x(hist_x[0].x) + 1;
+    var rectsX = svg.selectAll('.bar')
+      .data(hist_x);
 
-    var rectsX = svg.selectAll("rect")
-      .data(layout);
-
-    rectsX.enter().append("svg:rect");
+    rectsX.enter().append('rect')
+      .attr('class', 'bar')
+      .attr('x', function(d) { return x(d.x); })
+      .attr('width', barWidth)
+      .attr('y', height)
+      .attr('height', 0);
 
     rectsX
     .attr({
-      x: function(d,i) {
-        return xScale(i)
-      },
-      y: function(d) { return height-heightScale(d.length); },
-      width: xScale.rangeBand(),
-      height: function(d) {
-        return heightScale(d.length);
-      },
+      y: function(d) { return height-y2(d.length); },
+      height: function(d) { return y2(d.length); },
       fill: '#e5a5b0'
     }); 
   
