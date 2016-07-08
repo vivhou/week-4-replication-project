@@ -103,6 +103,14 @@
       margin-bottom: 20px;
     }
 
+    #x_rect {
+
+    }
+
+    #y_rect {
+
+    }
+
 
 
 
@@ -213,32 +221,33 @@
 
     var xAxis = d3.svg.axis()
         .scale(x)
+        .ticks(10)
         .orient("top")
         .tickSize(height) 
         .tickFormat(formatPercentage);
 
     var yAxis = d3.svg.axis()
         .scale(y)
-        .orient("left")
         .ticks(10)
+        .orient("left")
      //   .outerTickSize(0)
         .tickSize(-width, 0, 0) 
         .tickFormat(formatPercentage_y);
 
     var gx = svg.append("g")
-          .attr("class", "x axis")
-          .attr("transform", "translate(0," + (height) + ")")
-          .call(xAxis)
-        gx.selectAll("g").filter(function(d) { return d;}) //need to use filter since true values do not return 0
-          .classed("minor", true);
-     //   .attr("transform")
-        gx.selectAll("text")
-         .attr("transform", "translate(0," + (height + margin.bottom/2) + ")")
-        gx.append("text")
-          .attr("text-anchor", "middle")
-          .attr("transform", "translate(" + (width /2) + " ," + (margin.bottom*.85) + ")")
-          .style("text-anchor", "middle")
-          .text("Reading proficiency");
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + (height) + ")")
+        .call(xAxis)
+      gx.selectAll("g").filter(function(d) { return d;}) //need to use filter since true values do not return 0
+        .classed("minor", true);
+   //   .attr("transform")
+      gx.selectAll("text")
+       .attr("transform", "translate(0," + (height + margin.bottom/2) + ")")
+      gx.append("text")
+        .attr("text-anchor", "middle")
+        .attr("transform", "translate(" + (width /2) + " ," + (margin.bottom*.85) + ")")
+        .style("text-anchor", "middle")
+        .text("Reading proficiency");
 
    
 
@@ -318,7 +327,7 @@
       .attr('cx', function (d) { return x(d.Reading_proficient/100); })
       .attr('cy', function (d) { return y(d.Math_proficient/100); });
 
-   points.exit().remove();
+    points.exit().remove();
 
     // HISTOGRAMS
 
@@ -335,40 +344,42 @@
     var bin = layout[i];
     var colorScale = d3.scale.category20();
     svg.selectAll("circle")
-    .data(bin, function(d) { return d.Reading_proficient/100; })
-    .style("fill", function() {  return colorScale(i); })
+      .data(bin, function(d) { return d.Reading_proficient/100; })
+      .style("fill", function() {  return colorScale(i); })
 
      }
 
     var maxLength = d3.max(layout, function(d) { return d.length });
     var heightScale = d3.scale.linear()
-    .domain([0, maxLength])
-    .range([0, height/5]);
+      .domain([0, maxLength])
+      .range([0, height/5]);
 
     var xScale = d3.scale.ordinal()
-    .domain(d3.range(10))
-    .rangeBands([0, width], 0.2)
+      .domain(d3.range(10))
+      .rangeBands([0, width], 0.2)
 
  //   .bins(x.ticks(10));
+ 
+    var rectsX = svg.selectAll("rect")
+      .attr('class', 'x_rect')
+      .data(layout);
 
-   var rectsX = svg.selectAll("rect")
-      .data(layout)
-      .enter()
-      .append("rect");
+    rectsX.enter().append("rect");
 
-   rectsX
+    rectsX
     .attr({
       x: function(d,i) {
         return xScale(i)
       },
-      y: function(d) { return (d.Reading_proficient/100); },
+      y: function(d) { return y-heightScale(d.length); },
       width: xScale.rangeBand(),
       height: function(d,i) {
         return heightScale(d.length);
       },
       fill: function(d, i) { return colorScale(i) }
     }); 
-
+  
+/*
     //Y-AXIS
 
     var hist_y = d3.layout.histogram()
@@ -399,28 +410,29 @@
  //   .bins(x.ticks(10));
 
    var rectsY = svg.selectAll("rect")
-      .data(layout)
-      .enter()
-      .append("rect");
+      .attr('class', 'y_rect')
+      .data(layout);
+
+      rectsY.enter().append("rect");
 
    rectsY
     .attr({
       y: function(d,i) {
         return yScale(i)
       },
-      x: function(d) { return x(d.Math_proficient/100); },
-      height: yScale.rangeBand(),
+      x: function(d) { return x-widthScale(d.length); },
       width: function(d,i) {
         return widthScale(d.length);
       },
+      height: yScale.rangeBand(),
       fill: function(d, i) { return colorScale(i) }
     }); 
+  
 
+ //   rectsX.exit().remove(); 
+//    rectsY.exit().remove();
 
-    rectsX.exit().remove();
-    rectsY.exit().remove();
-
-    // REGRESSION LINE
+    // REGRESSION LINE */
   }
 </script>
 </body>
