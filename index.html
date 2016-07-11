@@ -332,89 +332,74 @@
 
     //X-AXIS
 
-    var hist_x = d3.layout.histogram()
+   var hist_x = d3.layout.histogram()
           .value(function(d) { return d.Reading_proficient/100; })
    //       .range([0, d3.max(schoolData, function(d){ return d.Reading_proficient/100; }) ])
           .bins(x.ticks(10))
           (schoolData);
 
-
     var y2 = d3.scale.linear()
         .domain([0, d3.max(hist_x, function(d) { return d.length; })]) 
-        .range([0, height]);
+        .range([0, height/5]);
     
-   // var maxLength = d3.max(layout, function(d) { return d.length });
-  // var heightScale = d3.scale.linear()
-  //    .domain([0, maxLength])
-   //   .range([0, height/5]);
-
- //   var xScale = d3.scale.ordinal()
- //     .domain(d3.range(10))
- //     .rangeBands([0, width], 0.2)
-
- //   .bins(x.ticks(10));
-    var barWidth = x(hist_x[1].x) - x(hist_x[0].x) + 1;
+    var barWidth = (x(hist_x[1].x) - x(hist_x[0].x) - 1)* .6;
     var rectsX = svg.selectAll('.bar')
       .data(hist_x);
 
     rectsX.enter().append('rect')
       .attr('class', 'bar')
-      .attr('x', function(d) { return x(d.x); })
+      .attr('x', function(d) { return x(d.x + .02); })
       .attr('width', barWidth)
       .attr('y', height)
       .attr('height', 0);
 
+      console.log(rectsX);
     rectsX
     .attr({
       y: function(d) { return height-y2(d.length); },
       height: function(d) { return y2(d.length); },
       fill: '#e5a5b0'
     }); 
-  
 
     //Y-AXIS
-/*
-    var hist_y = d3.layout.histogram()
+
+/*    var hist_y = d3.layout.histogram()
           .value(function(d) { return d.Math_proficient/100; })
-          .range([0, d3.max(schoolData, function(d){ return d.Math_proficient/100; }) ])
+  //        .range([0, d3.max(schoolData, function(d){ return d.Math_proficient/100; }) ])
           .bins(y.ticks(10))
+          (schoolData);
 
-    var layout = hist_y(schoolData);
 
-    var maxLength = d3.max(layout, function(d) { return d.length });
-    var widthScale = d3.scale.linear()
-    .domain([0, maxLength])
-    .range([0, width/5]);
+    var x2 = d3.scale.linear()
+      .domain([0, d3.max(hist_y, function(d) { return d.length; })])
+      .range(0, width);
 
-    var yScale = d3.scale.ordinal()
-    .domain(d3.range(10))
-    .rangeBands([height, 0], 0.2)
 
- //   .bins(x.ticks(10));
 
-   var rectsY = svg.selectAll("rect")
-      .data(layout);
+    var barHeight = y(hist_y[0].y) - y(hist_y[1].y);
 
-      rectsY.enter().append("rect");
+    var rectsY = svg.selectAll('.bar')
+      .data(hist_y);
+
+      rectsY.enter().append('rect')
+        .attr('class', 'barY')
+        .attr('x', width)
+        .attr('width', 0)
+        .attr('y', function(d) { return y(d.y)-barHeight; })
+        .attr('height', barHeight);
 
    rectsY
     .attr({
-      y: function(d,i) {
-        return yScale(i)
-      },
-      x: function(d) { return x-widthScale(d.length); },
-      width: function(d,i) {
-        return widthScale(d.length);
-      },
-      height: yScale.rangeBand(),
+      x: function(d) { return width-x2(d.length); },
+      width: function(d) { return x2(d.length); },
       fill: '#e5a5b0' 
     }); 
-  
+console.log(rectsY);
 
  //   rectsX.exit().remove(); 
 //    rectsY.exit().remove();
 
-    // REGRESSION LINE */
+    // REGRESSION LINE  */
   }
 </script>
 </body>
