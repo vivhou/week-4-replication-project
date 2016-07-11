@@ -103,13 +103,14 @@
       margin-bottom: 20px;
     }
 
-    #x_rect {
-
-    }
-
-    #y_rect {
-
-    }
+    .tooltip {
+       padding: .5em 1em;
+       background: rgba(0,0,0,.75);
+       color: white;
+       font-size: 13px;
+       font-weight: 700;
+       line-height: 1;
+     }
 
 
 
@@ -148,6 +149,7 @@
 <script type="text/javascript" src="https://npmcdn.com/d3@3.5.17/d3.min.js"></script>
 <script type="text/javascript" src="https://npmcdn.com/science@1.9.3/science.v1.min.js"></script>
 <script type="text/javascript" src="https://npmcdn.com/simple-statistics@2.0.0/dist/simple-statistics.min.js"></script>
+<script type="text/javascript" src="https://npmcdn.com/d3-tip@0.6.7/index.js"></script>
 <script>
   var data = [];
   var options = {
@@ -262,7 +264,16 @@
        .style("text-anchor", "middle")
        .text("Math proficiency");
 
-      chart.update();
+    //TOOLTIP
+
+    chart.tooltip = d3.tip()
+        .attr('class', 'tooltip')
+        .offset([-6, 0])
+        .html(function(d) { return d.length + '%' });
+
+    chart.tooltip(chart.svg);
+
+    chart.update();
    
   }
 
@@ -326,7 +337,9 @@
         .attr('x', function(d) { return chart.x(d.x + .02); })
         .attr('width', barWidth)
         .attr('y', height)
-        .attr('height', 0);
+        .attr('height', 0)
+        .on('mouseover', chart.tooltip.show)
+        .on('mouseout', chart.tooltip.hide);
 
     rectsX
     .attr({
@@ -362,7 +375,9 @@
         .attr('x', 0)
         .attr('width', 0)
         .attr('y', function(d) {return chart.y(d.x + 0.08); })//height - ((d.x+0.1) * height) + (0.02 * height); })
-        .attr('height', barHeight);
+        .attr('height', barHeight)
+        .on('mouseover', chart.tooltip.show)
+        .on('mouseout', chart.tooltip.hide);;
 
        rectsY
         .attr({
