@@ -207,7 +207,8 @@
 
 
     y = d3.scale.linear()
-      .domain(d3.extent(data, function (d) { return d.Math_proficient/100; })) 
+     // .domain(d3.extent(data, function (d) { return d.Math_proficient/100; })) 
+      .domain([0, d3.max(data, function (d) { return d.Math_proficient/100; })])
       .range([height, 0])
       .nice();
 
@@ -331,6 +332,7 @@
     // HISTOGRAMS
 
     //X-AXIS
+   
 
    var hist_x = d3.layout.histogram()
           .value(function(d) { return d.Reading_proficient/100; })
@@ -340,9 +342,12 @@
 
     var y2 = d3.scale.linear()
         .domain([0, d3.max(hist_x, function(d) { return d.length; })]) 
-        .range([0, height/5]);
+        .range([0, height/10]);
     
-    var barWidth = (x(hist_x[1].x) - x(hist_x[0].x) - 1)* .6;
+    var barWidth = (x(hist_x[1].x) - x(hist_x[0].x))* .6
+console.log(hist_x[1].x)
+console.log(hist_x[2].x)
+
     var rectsX = svg.selectAll('.bar')
       .data(hist_x);
 
@@ -361,41 +366,42 @@
       fill: '#e5a5b0'
     }); 
 
+
     //Y-AXIS
 
-/*    var hist_y = d3.layout.histogram()
+
+    var hist_y = d3.layout.histogram()
           .value(function(d) { return d.Math_proficient/100; })
-  //        .range([0, d3.max(schoolData, function(d){ return d.Math_proficient/100; }) ])
+    //      .range([0, d3.max(schoolData, function(d){ return d.Math_proficient/100; }) ])
           .bins(y.ticks(10))
           (schoolData);
 
+          console.log(hist_y)
 
     var x2 = d3.scale.linear()
       .domain([0, d3.max(hist_y, function(d) { return d.length; })])
-      .range(0, width);
+      .range([0, width/10]);
 
+      var barHeight2 = 0.6 * (height / 10.0)
+    var barHeight = (y(hist_y[1].x) - y(hist_y[0].x)) * -0.6;
+    console.log(barHeight2)
 
-
-    var barHeight = y(hist_y[0].y) - y(hist_y[1].y);
-
-    var rectsY = svg.selectAll('.bar')
+    var rectsY = svg.selectAll('.barY')
       .data(hist_y);
 
       rectsY.enter().append('rect')
         .attr('class', 'barY')
-        .attr('x', width)
+        .attr('x', 0)
         .attr('width', 0)
-        .attr('y', function(d) { return y(d.y)-barHeight; })
+        .attr('y', function(d) {return y(d.x + 0.08); })//height - ((d.x+0.1) * height) + (0.02 * height); })
         .attr('height', barHeight);
 
    rectsY
     .attr({
-      x: function(d) { return width-x2(d.length); },
       width: function(d) { return x2(d.length); },
       fill: '#e5a5b0' 
     }); 
-console.log(rectsY);
-
+console.log(rectsY)
  //   rectsX.exit().remove(); 
 //    rectsY.exit().remove();
 
