@@ -142,7 +142,7 @@
 </div>
 <div class="main section">
   <div class="container">
-    <div id="chart"></div>
+    <div id="chart1"></div>
   </div>
 </div>
 <script type="text/javascript" src="https://npmcdn.com/d3@3.5.17/d3.min.js"></script>
@@ -155,8 +155,6 @@
   };
   
 
-  var svg, x, y;
-
   var margin = { top: 15, right: 15, bottom: 30, left: 45 } ; //spacing b/w svg and g
 
   var width = 840 - margin.right - margin.left;
@@ -165,31 +163,27 @@
   // FETCH DATA
 
   d3.json('school_data.json', function(error, json) {
-    if (error) { throw json;} //if error is defined, then don't do anything
-
-
-    
+    if (error) { throw error;} //if error is defined, then don't do anything  
 
     data = json;
 
+    var chart = new Chart();
 
-    setup(); //must occur after fetching the data
-    update();
+    // EVENT HANDLERS
+
+    d3.select('#categories').on('change', function () {
+      options.categoryRange = d3.event.target.value;
+      chart.update();
+    });
+
   });
 
-  function setup() {
+  function Chart() {
+
+    var chart = this;
     // SVG
-  //  var map = data.map(function(i) { return i.Reading_proficient; })
 
-    
- //    var maxLength = d3.max(layout, function(d) { return d.length });
-  //   var widthScale = d3.scale.linear()
-  //  .domain([0, maxLength])
-  //  .range([0, width])
-
-
-
-    svg = d3.select('#chart')
+    chart.svg = d3.select('#chart1')
       .append('svg')
       .attr('width', width + margin.right + margin.left)
       .attr('height', height + margin.top + margin.bottom)
@@ -200,13 +194,13 @@
     // SCALES
 
 
-    x = d3.scale.linear()
+    chart.x = d3.scale.linear()
       .domain([0, d3.max(data, function (d) { return d.Reading_proficient/100; })]) //finds highest value of reading scores
       .range([0, width])
       .nice();
 
 
-    y = d3.scale.linear()
+    chart.y = d3.scale.linear()
      // .domain(d3.extent(data, function (d) { return d.Math_proficient/100; })) 
       .domain([0, d3.max(data, function (d) { return d.Math_proficient/100; })])
       .range([height, 0])
@@ -220,85 +214,65 @@
     };
 
     var xAxis = d3.svg.axis()
-        .scale(x)
+        .scale(chart.x)
         .ticks(10)
         .orient("top")
         .tickSize(height) 
         .tickFormat(formatPercentage);
 
     var yAxis = d3.svg.axis()
-        .scale(y)
+        .scale(chart.y)
         .ticks(10)
         .orient("left")
      //   .outerTickSize(0)
         .tickSize(-width, 0, 0) 
         .tickFormat(formatPercentage_y);
 
-    var gx = svg.append("g")
+    var gx = chart.svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + (height) + ")")
         .call(xAxis)
-      gx.selectAll("g").filter(function(d) { return d;}) //need to use filter since true values do not return 0
+    gx.selectAll("g").filter(function(d) { return d;}) //need to use filter since true values do not return 0
         .classed("minor", true);
    //   .attr("transform")
-      gx.selectAll("text")
+    gx.selectAll("text")
        .attr("transform", "translate(0," + (height + margin.bottom/2) + ")")
-      gx.append("text")
+    gx.append("text")
         .attr("text-anchor", "middle")
         .attr("transform", "translate(" + (width /2) + " ," + (margin.bottom*.85) + ")")
         .style("text-anchor", "middle")
         .text("Reading proficiency");
 
+ 
+
+    var gy= chart.svg.append("g")
+        .attr("class", "y axis")
+     //   .attr("transform", "translate(" + ",0)")
+        .call(yAxis)
+    gy.selectAll("g").filter(function(d) { return d;})
+        .classed("minor", true);
+    gy.selectAll("text") 
+       .attr("x", -1)
+       .attr("dy", 0);
+    gy.append("text")
+       .attr("transform", "rotate(-90)")
+       .attr("y", -42)
+       .attr("x", margin.top - (height/2))
+       .attr("dy", ".71em")
+       .style("text-anchor", "middle")
+       .text("Math proficiency");
+
+      chart.update();
    
-
-    var gy= svg.append("g")
-           .attr("class", "y axis")
-           .attr("transform", "translate(" + ",0)")
-           .call(yAxis)
-        gy.selectAll("g").filter(function(d) { return d;})
-           .classed("minor", true);
-
-        gy.selectAll("text") 
-           .attr("x", -1)
-           .attr("dy", 0);
-
-        gy.append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("y", -42)
-          .attr("x", margin.top - (height/2))
-          .attr("dy", ".71em")
-          .style("text-anchor", "middle")
-          .text("Math proficiency");
-   
-
-
-        /*     
-          .append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("y", 0 - margin.left)
-          .attr("dy", ".7em")
-          .style("text-anchor", "end")
-          .text("Math proficiency");
-*/
-
-    
-    // EVENT HANDLERS
-
-    d3.select('#categories').on('change', function () {
-      options.categoryRange = d3.event.target.value;
-      update();
-    });
   }
 
-  function update() {
+
+  Chart.prototype.update = function () {
     // TRANSFORM
+    var chart = this;
+
     schoolData = data.slice();
-/*
-    data.forEach(function (d) { 
-      d.filtered = d.Category;
-      var schoolData = data.filter(function (d) {return d.filtered;});
-    })
-*/
+
 
     if (options.categoryRange !== 'all') {
      // var categoryRange = options.categoryRange.split('');
@@ -311,23 +285,21 @@
 
     // SCATTERPLOT
 
-   // svg.selectAll('.point')
-    //  .remove();
+    var points = chart.svg.selectAll('.point') //point is used instead of circles, in case different shapes are used
+      .data(schoolData);
 
-  var points = svg.selectAll('.point') //point is used instead of circles, in case different shapes are used
-    .data(schoolData);
 
-    //console.log(points)
-
-    points.enter().append('circle')  //add points if points don't exist
+   points.enter().append('circle')  //add points if points don't exist
       .attr('class', 'point')
       .attr('r', 5)
 
     points    //all points
-      .attr('cx', function (d) { return x(d.Reading_proficient/100); })
-      .attr('cy', function (d) { return y(d.Math_proficient/100); });
+      .attr('cx', function (d) { return chart.x(d.Reading_proficient/100); })
+      .attr('cy', function (d) { return chart.y(d.Math_proficient/100); });
 
     points.exit().remove();
+
+
 
     // HISTOGRAMS
 
@@ -335,30 +307,27 @@
    
 
    var hist_x = d3.layout.histogram()
-          .value(function(d) { return d.Reading_proficient/100; })
-   //       .range([0, d3.max(schoolData, function(d){ return d.Reading_proficient/100; }) ])
-          .bins(x.ticks(10))
-          (schoolData);
+        .value(function(d) { return d.Reading_proficient/100; })
+ //       .range([0, d3.max(schoolData, function(d){ return d.Reading_proficient/100; }) ])
+        .bins(chart.x.ticks(10))
+        (schoolData);
 
     var y2 = d3.scale.linear()
         .domain([0, d3.max(hist_x, function(d) { return d.length; })]) 
         .range([0, height/10]);
     
-    var barWidth = (x(hist_x[1].x) - x(hist_x[0].x))* .6
-console.log(hist_x[1].x)
-console.log(hist_x[2].x)
+    var barWidth = (chart.x(hist_x[1].x) - chart.x(hist_x[0].x))* .6
 
-    var rectsX = svg.selectAll('.bar')
-      .data(hist_x);
+    var rectsX = chart.svg.selectAll('.bar')
+        .data(hist_x);
 
     rectsX.enter().append('rect')
-      .attr('class', 'bar')
-      .attr('x', function(d) { return x(d.x + .02); })
-      .attr('width', barWidth)
-      .attr('y', height)
-      .attr('height', 0);
+        .attr('class', 'bar')
+        .attr('x', function(d) { return chart.x(d.x + .02); })
+        .attr('width', barWidth)
+        .attr('y', height)
+        .attr('height', 0);
 
-      console.log(rectsX);
     rectsX
     .attr({
       y: function(d) { return height-y2(d.length); },
@@ -369,11 +338,10 @@ console.log(hist_x[2].x)
 
     //Y-AXIS
 
-
     var hist_y = d3.layout.histogram()
           .value(function(d) { return d.Math_proficient/100; })
     //      .range([0, d3.max(schoolData, function(d){ return d.Math_proficient/100; }) ])
-          .bins(y.ticks(10))
+          .bins(chart.y.ticks(10))
           (schoolData);
 
           console.log(hist_y)
@@ -382,31 +350,32 @@ console.log(hist_x[2].x)
       .domain([0, d3.max(hist_y, function(d) { return d.length; })])
       .range([0, width/10]);
 
-      var barHeight2 = 0.6 * (height / 10.0)
-    var barHeight = (y(hist_y[1].x) - y(hist_y[0].x)) * -0.6;
+    var barHeight2 = 0.6 * (height / 10.0)
+    var barHeight = (chart.y(hist_y[1].x) - chart.y(hist_y[0].x)) * -0.6;
     console.log(barHeight2)
 
-    var rectsY = svg.selectAll('.barY')
+    var rectsY = chart.svg.selectAll('.barY')
       .data(hist_y);
 
       rectsY.enter().append('rect')
         .attr('class', 'barY')
         .attr('x', 0)
         .attr('width', 0)
-        .attr('y', function(d) {return y(d.x + 0.08); })//height - ((d.x+0.1) * height) + (0.02 * height); })
+        .attr('y', function(d) {return chart.y(d.x + 0.08); })//height - ((d.x+0.1) * height) + (0.02 * height); })
         .attr('height', barHeight);
 
-   rectsY
-    .attr({
-      width: function(d) { return x2(d.length); },
-      fill: '#e5a5b0' 
-    }); 
-console.log(rectsY)
+       rectsY
+        .attr({
+          width: function(d) { return x2(d.length); },
+          fill: '#e5a5b0' 
+        }); 
+
  //   rectsX.exit().remove(); 
 //    rectsY.exit().remove();
 
     // REGRESSION LINE  */
-  }
+ };
+ 
 </script>
 </body>
 </html>
